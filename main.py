@@ -28,9 +28,9 @@ def create_user():
     is_username_valid = re.match("^([a-zA-Z0-9@*#]{3,20})$",username)
     is_password_valid = re.match("^([a-zA-Z0-9@*#]{3,20})$",password)
 
-    template = jinja_env.get_template('signup.html')
+    template_index = jinja_env.get_template('signup.html')
     if (is_email_valid == None and email != "") or is_username_valid == None or username == "" or is_password_valid == None or password != verify or password == "":
-        return template.render(username = username, username_error = error_field_blank if username == "" else error_username_invalid if is_username_valid == None else "" , 
+        return template_index.render(username = username, username_error = error_field_blank if username == "" else error_username_invalid if is_username_valid == None else "" , 
                                 password = "", password_error = error_field_blank if password == "" else error_password_mismatch if password != verify else error_password_invalid if is_password_valid == None else "",
                                 verify = "", verify_error = error_field_blank if verify == "" else error_password_mismatch if password != verify else error_password_invalid if is_password_valid == None else "",
                                 email = email, email_error = "" if email == "" else error_email_invalid if is_email_valid == None else "")
@@ -39,7 +39,7 @@ def create_user():
 
 @app.route("/")
 def index():
-    template = jinja_env.get_template('signup.html')
-    return template.render()
+    template_index = jinja_env.get_template('signup.html')
+    return template_index.render()
 
 app.run()
